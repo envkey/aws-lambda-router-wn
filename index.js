@@ -117,7 +117,7 @@ class AWSLambdaRouter {
       response = JSON.stringify(_res);
     }
     if (_err) {
-      if (!_err.code) _err.code = '500';
+      if (!_err.code) _err.code = 500;
     }
     let headers = {
       'Content-Type': responseType
@@ -127,7 +127,7 @@ class AWSLambdaRouter {
       headers["Access-Control-Allow-Credentials"] = true;
     }
     this.callback(null, {
-      statusCode: _err ? _err.code : '200',
+      statusCode: _err ? _err.code : 200,
       body: _err ? _err.toString() : response,
       headers: headers
     })
