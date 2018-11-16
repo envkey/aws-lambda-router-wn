@@ -4,7 +4,7 @@ export type Responder = (err: Error, data?: string | {})=> void
 
 export interface Options {responseType: string, bodyType: string}
 
-export type RouteHandler = (request: APIGatewayEvent, response: Responder)=> void
+export type RouteHandler = (request: AWSLambdaRouterEvent, response: Responder)=> void
 
 export type MethodHandler = (path: string, handler: RouteHandler, options?: Options)=> void
 
