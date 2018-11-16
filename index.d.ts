@@ -8,9 +8,11 @@ export type RouteHandler = (request: APIGatewayEvent, response: Responder)=> voi
 
 export type MethodHandler = (path: string, handler: RouteHandler, options?: Options)=> void
 
+type AWSLambdaRouterEvent = APIGatewayEvent & { body: string | {} }
+
 declare class AWSLambdaRouter {
   constructor()
-  public serve: (event: APIGatewayEvent, callback: Callback<APIGatewayProxyResult>)=> void
+  public serve: (event: AWSLambdaRouterEvent, callback: Callback<APIGatewayProxyResult>)=> void
   public get: MethodHandler
   public post: MethodHandler
   public delete: MethodHandler
