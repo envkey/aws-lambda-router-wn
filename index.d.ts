@@ -8,7 +8,7 @@ export type RouteHandler = (request: AWSLambdaRouterEvent, response: Responder)=
 
 export type MethodHandler = (path: string, handler: RouteHandler, options?: Options)=> void
 
-type AWSLambdaRouterEvent = APIGatewayEvent & { body: string | {} }
+export type AWSLambdaRouterEvent = APIGatewayEvent & { body: string | {} }
 
 declare class AWSLambdaRouter {
   constructor()
