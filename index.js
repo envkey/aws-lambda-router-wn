@@ -109,7 +109,7 @@ class AWSLambdaRouter {
     return route;
   }
 
-  __done(__options, _err, _res) {
+  __done(__options, _err, _res, _status) {
     let response = _res;
     let responseType = this.responseType;
     if (__options.responseType) responseType = __options.responseType;
@@ -126,8 +126,16 @@ class AWSLambdaRouter {
       headers["Access-Control-Allow-Origin"] = "*";
       headers["Access-Control-Allow-Credentials"] = true;
     }
+    let status
+    if (_status){
+      status = _status
+    } else if (_err){
+      status = _err.code
+    } else {
+      status = 200
+    }
     this.callback(null, {
-      statusCode: _err ? _err.code : 200,
+      statusCode: status,
       body: _err ? _err.toString() : response,
       headers: headers
     })
